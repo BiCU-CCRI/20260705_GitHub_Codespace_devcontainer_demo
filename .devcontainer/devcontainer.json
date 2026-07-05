@@ -3,6 +3,7 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
+  "remoteUser": "vscode",
   "forwardPorts": [8888],
   "portsAttributes": {
     "8888": {

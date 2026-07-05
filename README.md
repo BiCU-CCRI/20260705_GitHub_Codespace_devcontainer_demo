@@ -11,10 +11,14 @@ See [`presentation_plan.md`](presentation_plan.md) for the full talk outline thi
 
 ### What's in here
 
-- `.devcontainer/Dockerfile` — starts from the same `mambaorg/micromamba` base image as demos 1
-  and 2, but adds:
+- `.devcontainer/Dockerfile` — starts from the same `ubuntu-22.04` base image as demos 1 and 2,
+  and adds:
   - system libraries needed by some R packages (`libcurl`, `libxml2`, `libssl`, build tools),
-    installed as root, then drops back to the non-root mamba user;
+    installed as root, then drops back to the non-root `vscode` user;
+  - Miniforge installed directly from the official installer script (the same `mamba` you get from
+    the `miniforge` feature in demos 1/2 — it's installed manually here because devcontainer
+    features only apply *after* a custom Dockerfile build finishes, so the feature itself isn't
+    available yet inside these `RUN` steps);
   - the same style of `environment.yml`-driven install as before, plus `jupyterlab`;
   - a registered Python **and** R Jupyter kernel, so both languages show up side by side in one
     JupyterLab instance.
