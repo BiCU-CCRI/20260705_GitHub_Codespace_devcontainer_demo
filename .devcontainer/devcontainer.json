@@ -1,7 +1,7 @@
 {
   "name": "Demo 01 - Minimal mamba devcontainer",
-  "image": "mambaorg/micromamba:1.5.8-bookworm",
-  "postCreateCommand": "micromamba install -y -n base -f .devcontainer/environment.yml -c conda-forge -c bioconda && micromamba clean --all --yes",
+  "image": "ghcr.io/rocker-org/devcontainer-features/miniforge:2",
+  "postCreateCommand": "mamba install -y -n base -f .devcontainer/environment.yml -c conda-forge -c bioconda && mamba clean --all --yes",
   "customizations": {
     "vscode": {
       "extensions": [
