@@ -3,31 +3,22 @@
 ## Demo 3 of 3 — Dockerfile-based devcontainer (`demo/03-docker-dockerfile`)
 
 The most advanced of the three examples: instead of pointing `devcontainer.json` at a ready-made
-image (as in demos 1 and 2), we build our **own** image from a `.devcontainer/Dockerfile`. This is
-the step you take once you need OS-level control that a prebuilt image can't give you — extra
-system libraries, a non-default user flow, registered Jupyter kernels, additional forwarded ports.
+image or feature (as in demos 1 and 2), we build our **own** image from a
+`.devcontainer/Dockerfile`. This is the step you take once you need OS-level control that a
+prebuilt image can't give you. Kept deliberately minimal for the demo: just mamba, installed via
+the Dockerfile itself.
 
 See [`presentation_plan.md`](presentation_plan.md) for the full talk outline this demo belongs to.
 
 ### What's in here
 
 - `.devcontainer/Dockerfile` — starts from the same `ubuntu-22.04` base image as demos 1 and 2,
-  and adds:
-  - system libraries needed by some R packages (`libcurl`, `libxml2`, `libssl`, build tools),
-    installed as root, then drops back to the non-root `vscode` user;
-  - Miniforge installed directly from the official installer script (the same `mamba` you get from
-    the `miniforge` feature in demos 1/2 — it's installed manually here because devcontainer
-    features only apply *after* a custom Dockerfile build finishes, so the feature itself isn't
-    available yet inside these `RUN` steps);
-  - the same style of `environment.yml`-driven install as before, plus `jupyterlab`;
-  - a registered Python **and** R Jupyter kernel, so both languages show up side by side in one
-    JupyterLab instance.
-- `.devcontainer/environment.yml` — Python + R + libraries (as in demo 2), plus `jupyterlab`,
-  `ipykernel`, `r-irkernel`, and `bcftools` as an extra bioinformatics CLI tool.
-- `.devcontainer/devcontainer.json` — points `build.dockerfile` at the Dockerfile above and
-  forwards port `8888` for JupyterLab.
-- `scripts/demo.py` / `scripts/demo.R` — same small demo scripts as demo 2, usable directly or
-  from a notebook via the registered kernels.
+  installs `curl`, then installs Miniforge directly from the official installer script (the same
+  `mamba` you get from the `miniforge` feature in demos 1/2 — it's installed manually here because
+  devcontainer features only apply *after* a custom Dockerfile build finishes, so the feature
+  itself isn't available yet inside these `RUN` steps).
+- `.devcontainer/environment.yml` — just `python=3.11`.
+- `.devcontainer/devcontainer.json` — points `build.dockerfile` at the Dockerfile above.
 
 ### How to launch
 
@@ -49,25 +40,14 @@ See [`presentation_plan.md`](presentation_plan.md) for the full talk outline thi
 ### Verify it works
 
 ```bash
-python scripts/demo.py
-Rscript scripts/demo.R
-bcftools --version
+mamba --version
+python --version
 ```
-
-Then start JupyterLab and use VS Code's forwarded-ports notification (or open
-`http://localhost:8888` yourself) to reach it in your browser:
-
-```bash
-jupyter lab --ip=0.0.0.0 --no-browser
-```
-
-Inside JupyterLab, check the kernel picker — both "Demo 03 (Python)" and "Demo 03 (R)" should be
-available in the same environment.
 
 ### Why this is useful
 
-- Full control: OS packages, non-root user setup, additional services, and forwarded ports are all
-  things a plain `image:` reference can't express — a `Dockerfile` can.
+- Full control: OS packages, non-root user setup, and anything else a plain `image:` reference
+  can't express are all things a `Dockerfile` can.
 - Still fully reproducible and still "one command to launch it" for anyone opening this branch,
   even though there's a real image build happening under the hood.
 - The natural end of the ladder from this series: `demo/01-mamba-basic` (ready-made image) →
