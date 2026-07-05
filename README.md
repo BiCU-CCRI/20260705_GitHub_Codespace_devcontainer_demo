@@ -2,17 +2,17 @@
 
 ## Demo 2 of 3 — mamba + Python + R devcontainer (`demo/02-mamba-python-r`)
 
-A step up from `demo/01-mamba-basic`: the same micromamba base image, but the `environment.yml`
-now installs **both** Python and R, plus a few libraries from each, so the two languages
-bioinformatics most often needs together — Python for wrangling/pipelines, R for stats/plots —
-coexist in one reproducible environment.
+A step up from `demo/01-mamba-basic`: the same Ubuntu base image + `miniforge` devcontainer feature,
+but the `environment.yml` now installs **both** Python and R, plus a few libraries from each, so
+the two languages bioinformatics most often needs together — Python for wrangling/pipelines, R for
+stats/plots — coexist in one reproducible environment.
 
 See [`presentation_plan.md`](presentation_plan.md) for the full talk outline this demo belongs to.
 
 ### What's in here
 
-- `.devcontainer/devcontainer.json` — same `mambaorg/micromamba` base image as demo 1, plus VS
-  Code extensions for both Python and R.
+- `.devcontainer/devcontainer.json` — same `ubuntu-22.04` base image + `miniforge` feature as
+  demo 1, plus VS Code extensions for both Python and R.
 - `.devcontainer/environment.yml` — Python 3.11 (`pandas`, `biopython`) and R 4.3
   (`r-ggplot2`, `r-data.table`, `r-dplyr`).
 - `scripts/demo.py` — tiny Python script: reverse-complements a toy DNA sequence with Biopython,
