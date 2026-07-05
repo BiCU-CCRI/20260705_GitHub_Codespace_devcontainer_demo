@@ -1,0 +1,16 @@
+name: base
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.11
+  - r-base=4.3
+  - r-irkernel
+  - pandas
+  - biopython
+  - ipykernel
+  - jupyterlab
+  - r-ggplot2
+  - r-data.table
+  - r-dplyr
+  - bcftools

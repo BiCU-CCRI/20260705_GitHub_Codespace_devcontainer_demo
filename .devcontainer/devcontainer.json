@@ -1,0 +1,23 @@
+{
+  "name": "Demo 03 - Dockerfile-based devcontainer (mamba + Python + R + Jupyter)",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "forwardPorts": [8888],
+  "portsAttributes": {
+    "8888": {
+      "label": "JupyterLab",
+      "onAutoForward": "notify"
+    }
+  },
+  "postCreateCommand": "echo 'Environment ready. Run: jupyter lab --ip=0.0.0.0 --no-browser'",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "reditorsupport.r"
+      ]
+    }
+  }
+}
