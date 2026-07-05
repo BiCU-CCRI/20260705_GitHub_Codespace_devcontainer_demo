@@ -1,0 +1,13 @@
+{
+  "name": "Demo 02 - mamba + Python + R devcontainer",
+  "image": "mambaorg/micromamba:1.5.8-bookworm",
+  "postCreateCommand": "micromamba install -y -n base -f .devcontainer/environment.yml -c conda-forge -c bioconda && micromamba clean --all --yes",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "reditorsupport.r"
+      ]
+    }
+  }
+}
