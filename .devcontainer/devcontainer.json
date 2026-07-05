@@ -2,7 +2,9 @@
   "name": "Demo 02 - mamba + Python + R devcontainer",
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
   "features": {
-    "ghcr.io/rocker-org/devcontainer-features/miniforge:2": {}
+    "ghcr.io/rocker-org/devcontainer-features/miniforge:2": {},
+    "ghcr.io/devcontainers/features/python:1": {},
+    "ghcr.io/rocker-org/devcontainer-features/rstudio-server:0": {}
   },
   "postCreateCommand": "mamba install -y -n base -f .devcontainer/environment.yml -c conda-forge -c bioconda && mamba clean --all --yes",
   "customizations": {
