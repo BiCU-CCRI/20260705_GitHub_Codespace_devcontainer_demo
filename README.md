@@ -2,17 +2,20 @@
 
 ## Demo 1 of 3 — Minimal mamba devcontainer (`demo/01-mamba-basic`)
 
-The simplest possible useful devcontainer: a ready-made [micromamba](https://mamba.readthedocs.io/)
-base image plus one small `environment.yml`. No Dockerfile, no features, nothing to build from
-scratch — the package manager is already in the image, we just tell it what to install.
+The simplest possible useful devcontainer: a plain Ubuntu base image plus the
+[`miniforge` devcontainer feature](https://github.com/rocker-org/devcontainer-features) (which
+installs conda + [mamba](https://mamba.readthedocs.io/)), plus one small `environment.yml`. No
+Dockerfile, nothing to build from scratch — the feature installs the package manager for us, we
+just tell it what to install.
 
 This is the first of three progressively more complex examples used in the companion talk, see
 [`presentation_plan.md`](presentation_plan.md) on `main` for the full session outline.
 
 ### What's in here
 
-- `.devcontainer/devcontainer.json` — uses the `mambaorg/micromamba` image directly and runs
-  `micromamba install` once on container creation.
+- `.devcontainer/devcontainer.json` — uses `mcr.microsoft.com/devcontainers/base:ubuntu-22.04` as
+  the base image, adds the `miniforge` feature to install conda/mamba, and runs `mamba install`
+  once on container creation.
 - `.devcontainer/environment.yml` — Python 3.11 + `samtools` (a real, small, fast-to-install
   bioinformatics CLI tool), pulled from `conda-forge` and `bioconda`.
 
@@ -38,8 +41,8 @@ nothing manual to run first.
 Once the container is up, open a terminal inside it and run:
 
 ```bash
-micromamba --version
-micromamba list
+mamba --version
+mamba list -n base
 samtools --version
 ```
 
